@@ -1,0 +1,33 @@
+apply plugin: "java"
+
+repositories {
+    maven {
+        url "http://repo.nukkitx.com/main/"
+    }
+    maven {
+        url "https://mvnrepository.com/artifact/org.mongodb/bson"
+    }
+    maven {
+        url "https://mvnrepository.com/artifact/org.mongodb/mongodb-driver"
+    }
+    maven {
+        url "https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core"
+    }
+}
+
+dependencies {
+    implementation "cn.nukkit:nukkit:1.0-SNAPSHOT"
+    implementation "org.mongodb:bson:3.11.0"
+    implementation "org.mongodb:mongodb-driver:3.11.0"
+    implementation "org.mongodb:mongodb-driver-core:3.11.0"
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "NukkitDB.Main"
+    }
+}
+
+sourceSets {
+    main.java.srcDir "src/main"
+}

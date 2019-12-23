@@ -1,0 +1,8 @@
+# if using mongodb atlas
+uri: ""
+database: ""
+collection: ""
+
+# if database is run on a local machine
+host: ""
+port: ""
