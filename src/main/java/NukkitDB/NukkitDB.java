@@ -28,7 +28,7 @@ public class NukkitDB {
         if (client != null) client.close();
     }
 
-    public Document query(String value, String fieldName, String database, String collection){
+    public static Document query(String value, String fieldName, String database, String collection){
         return getCollection(getDatabase(database), collection).find(Filters.eq(fieldName, value)).first();
     }
 
