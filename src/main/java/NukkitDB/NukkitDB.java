@@ -8,7 +8,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
-class NukkitDB {
+public class NukkitDB {
 
     private static MongoClient client = null;
 
