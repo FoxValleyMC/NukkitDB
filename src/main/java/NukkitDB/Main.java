@@ -10,12 +10,12 @@ public class Main extends PluginBase {
     public void onEnable() {
         this.saveDefaultConfig();
         this.nukkitDB = new NukkitDB();
-        NukkitDB.createConnection(this);
+        nukkitDB.createConnection(this);
     }
 
     @Override
     public void onDisable() {
-        NukkitDB.closeConnection();
+        nukkitDB.closeConnection();
     }
 
     public NukkitDB get() {
