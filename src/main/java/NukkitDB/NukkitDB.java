@@ -32,6 +32,14 @@ public class NukkitDB {
         return getCollection(getDatabase(database), collection).find(Filters.eq(fieldName, value)).first();
     }
 
+    public static void insertDocument(Document document,String database, String collection) {
+        getCollection(getDatabase(database), collection).insertOne(document);
+    }
+
+    public static void updateDocument(String term, String query, String key, String value, String database, String collection) {
+        getCollection(getDatabase(database), collection).updateOne(Filters.eq(term, query), new Document("$set", new Document(key, value)));
+    }
+
     private static MongoDatabase getDatabase(String database) {
         return client.getDatabase(database);
     }
