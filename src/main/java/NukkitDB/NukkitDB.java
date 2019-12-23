@@ -12,7 +12,7 @@ public class NukkitDB {
 
     private static MongoClient client = null;
 
-    static void createConnection(Main plugin) {
+    void createConnection(Main plugin) {
         try {
             Config config = plugin.getConfig();
             String databaseString = config.getString("database");
@@ -24,7 +24,7 @@ public class NukkitDB {
         }
     }
 
-    static void closeConnection() {
+    void closeConnection() {
         if (client != null) client.close();
     }
 
@@ -40,11 +40,11 @@ public class NukkitDB {
         getCollection(getDatabase(database), collection).updateOne(Filters.eq(term, query), new Document("$set", new Document(key, value)));
     }
 
-    private static MongoDatabase getDatabase(String database) {
+    private MongoDatabase getDatabase(String database) {
         return client.getDatabase(database);
     }
 
-    private static MongoCollection<Document> getCollection(MongoDatabase database, String collection) {
+    private MongoCollection<Document> getCollection(MongoDatabase database, String collection) {
         return database.getCollection(collection);
     }
 }
