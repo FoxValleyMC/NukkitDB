@@ -28,15 +28,15 @@ public class NukkitDB {
         if (client != null) client.close();
     }
 
-    public static Document query(String value, String fieldName, String database, String collection){
+    public Document query(String value, String fieldName, String database, String collection){
         return getCollection(getDatabase(database), collection).find(Filters.eq(fieldName, value)).first();
     }
 
-    public static void insertDocument(Document document,String database, String collection) {
+    public void insertDocument(Document document,String database, String collection) {
         getCollection(getDatabase(database), collection).insertOne(document);
     }
 
-    public static void updateDocument(String term, String query, String key, String value, String database, String collection) {
+    public void updateDocument(String term, String query, String key, String value, String database, String collection) {
         getCollection(getDatabase(database), collection).updateOne(Filters.eq(term, query), new Document("$set", new Document(key, value)));
     }
 
