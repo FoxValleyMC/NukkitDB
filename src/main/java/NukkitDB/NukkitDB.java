@@ -36,7 +36,7 @@ public class NukkitDB {
         getCollection(getDatabase(database), collection).insertOne(document);
     }
 
-    public void updateDocument(String term, String query, String key, Integer value, String database, String collection) {
+    public void updateDocument(String term, String query, String key, String value, String database, String collection) {
         getCollection(getDatabase(database), collection).updateOne(Filters.eq(term, query), new Document("$set", new Document(key, value)));
     }
 
