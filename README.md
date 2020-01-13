@@ -1,4 +1,4 @@
-
+[![HitCount](http://hits.dwyl.io/TimelessMC/NukkitDB.svg)](http://hits.dwyl.io/TimelessMC/NukkitDB)
 
 <img src="https://i.imgur.com/RIWMp43.png" alt="icon" width="100px" />
 
