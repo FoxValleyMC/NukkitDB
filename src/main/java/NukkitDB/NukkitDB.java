@@ -36,7 +36,7 @@ public class NukkitDB {
      * @param field field in database to search
      * @return Document
      * */
-    public Document query(String querySearch, String field, String database, String collection) {
+    public static Document query(String querySearch, String field, String database, String collection) {
         return getCollection(getDatabase(database), collection).find(Filters.eq(field, querySearch)).first();
     }
 
@@ -46,7 +46,7 @@ public class NukkitDB {
      * @param database database name
      * @param collection collection name
      * */
-    public void insertDocument(Document document, String database, String collection) {
+    public static void insertDocument(Document document, String database, String collection) {
         getCollection(getDatabase(database), collection).insertOne(document);
     }
 
