@@ -28,23 +28,63 @@ public class NukkitDB {
         if (client != null) client.close();
     }
 
-    public Document query(String value, String fieldName, String database, String collection){
-        return getCollection(getDatabase(database), collection).find(Filters.eq(fieldName, value)).first();
+
+    /**
+     * @param database database name
+     * @param collection collection name
+     * @param querySearch value to search in database
+     * @param field field in database to search
+     * @return Document
+     * */
+    public Document query(String querySearch, String field, String database, String collection) {
+        return getCollection(getDatabase(database), collection).find(Filters.eq(field, querySearch)).first();
     }
 
-    public void insertDocument(Document document,String database, String collection) {
+
+    /**
+     * @param document new document to create
+     * @param database database name
+     * @param collection collection name
+     * */
+    public void insertDocument(Document document, String database, String collection) {
         getCollection(getDatabase(database), collection).insertOne(document);
     }
 
-    public void updateDocument(String term, String query, String key, String value, String database, String collection) {
-        getCollection(getDatabase(database), collection).updateOne(Filters.eq(term, query), new Document("$set", new Document(key, value)));
+
+    /**
+     * @apiNote update string value
+     * @param querySearch value to search in database where to update
+     * @param field field in database to search where to update
+     * @param key key in document to update
+     * @param value value to update in key
+     * @param database database name
+     * @param collection collection name
+     * */
+    public static void updateDocument(String querySearch, String field, String key, String value, String database, String collection) {
+        getCollection(getDatabase(database), collection).updateOne(Filters.eq(field, querySearch), new Document("$set", new Document(key, value)));
     }
 
-    private MongoDatabase getDatabase(String database) {
+
+    /**
+     * @apiNote update int value
+     * @param querySearch value to search in database where to update
+     * @param field field in database to search where to update
+     * @param key key in document to update
+     * @param value value to update in key
+     * @param database database name
+     * @param collection collection name
+     * */
+    public static void updateDocument(String querySearch, String field, String key, Integer value, String database, String collection) {
+        getCollection(getDatabase(database), collection).updateOne(Filters.eq(field, querySearch), new Document("$set", new Document(key, value)));
+    }
+
+
+    private static MongoDatabase getDatabase(String database) {
         return client.getDatabase(database);
     }
 
-    private MongoCollection<Document> getCollection(MongoDatabase database, String collection) {
+
+    private static MongoCollection<Document> getCollection(MongoDatabase database, String collection) {
         return database.getCollection(collection);
     }
 }
