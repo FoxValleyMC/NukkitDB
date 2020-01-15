@@ -90,7 +90,7 @@ import java.util.HashMap;public class YourClass {
 
         String uuid = player.getUniqueId().toString();
         Map<String, Object> objectMap = new HashMap<>();
-        document.put("uuid", uuid);
+        objectMap.put("uuid", uuid);
         DatabaseHandler.insertDocument(objectMap);
         // you can add as many fields as you want with the '.put()' operator
         // .put("field", value);        
