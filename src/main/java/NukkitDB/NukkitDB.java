@@ -8,6 +8,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class NukkitDB {
@@ -38,8 +39,17 @@ public class NukkitDB {
      * @param field field in database to search
      * @return Document
      * */
-    public static Document query(String querySearch, String field, String database, String collection) {
-        return getCollection(getDatabase(database), collection).find(Filters.eq(field, querySearch)).first();
+    public static Map<String, Object> query(String querySearch, String field, String database, String collection) {
+        Document document = getCollection(getDatabase(database), collection).find(Filters.eq(field, querySearch)).first();
+        Map<String, Object> objectMap = new HashMap<String, Object>();
+        if (document != null) {
+            for (Document.Entry<String, Object> entry : document.entrySet()) {
+                objectMap.put(entry.getKey(), entry.getValue());
+            }
+            return objectMap;
+        } else {
+            return null;
+        }
     }
 
 
