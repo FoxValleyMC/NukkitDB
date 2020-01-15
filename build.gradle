@@ -15,16 +15,21 @@ repositories {
     }
 }
 
+configurations {
+    loadDependency
+}
+
 dependencies {
+    loadDependency group: "org.mongodb", name:"bson", version: "3.11.0"
+    loadDependency group: "org.mongodb", name:"mongodb-driver", version:"3.11.0"
+    loadDependency group: "org.mongodb", name:"mongodb-driver-core", version:"3.11.0"
     implementation "cn.nukkit:nukkit:1.0-SNAPSHOT"
-    implementation "org.mongodb:bson:3.11.0"
-    implementation "org.mongodb:mongodb-driver:3.11.0"
-    implementation "org.mongodb:mongodb-driver-core:3.11.0"
+    configurations.compile.extendsFrom(configurations.loadDependency)
 }
 
 jar {
-    manifest {
-        attributes "Main-Class": "NukkitDB.Main"
+    from {
+        configurations.loadDependency.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
