@@ -8,6 +8,8 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
+import java.util.Map;
+
 public class NukkitDB {
 
     private static MongoClient client = null;
@@ -42,11 +44,15 @@ public class NukkitDB {
 
 
     /**
-     * @param document new document to create
+     * @param objectMap new map of key/value pairs to create a json document in mongoDB
      * @param database database name
      * @param collection collection name
      * */
-    public static void insertDocument(Document document, String database, String collection) {
+    public static void insertDocument(Map<String, Object> objectMap, String database, String collection) {
+        Document document = new Document();
+        for (Map.Entry<String, Object> entry : objectMap.entrySet()) {
+            document.append(entry.getKey(), entry.getValue());
+        }
         getCollection(getDatabase(database), collection).insertOne(document);
     }
 
