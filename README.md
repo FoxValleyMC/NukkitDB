@@ -1,22 +1,15 @@
-[![HitCount](http://hits.dwyl.io/TimelessMC/NukkitDB.svg)](http://hits.dwyl.io/TimelessMC/NukkitDB)
-
 <img src="https://i.imgur.com/RIWMp43.png" alt="icon" width="100px" />
 
 # Important!
 This plugin requires MongoDB java drivers which conveniently has been provided within the `/libs` directory ***OF THIS REPO***
 
 # Installation
-<img src="https://imgur.com/QmG58Yz.png" alt="image"/>
-
-- Create a `libs` directory in your server root. (i.e) `C://users/yourname/desktop/nukkitX-server/libs`... It should be alongside your `run.bat` file  
-
-- place `bson-3.11.0.jar`, `mongodb-driver-3.11.0.jar`, and `mongodb-driver-core-3.11.0.jar` inside the `/libs` you just created
-
-- Edit your `run.bat` and write:
-```batch
-java -cp YOUR_NUKKIT_JAR.jar;libs/* cn.nukkit.Nukkit
+ - Drop into plugins folder
+ - Start and stop your server again
+ - Edit newly generated config.yml
+ ```yaml
+uri: "YOUR_ URI_STRING"
 ```
-This command will load the mongoDB java drivers into the servers main package
 
 # Api Usage
  - create two `new` properties within your `config.yml`
@@ -25,9 +18,8 @@ This command will load the mongoDB java drivers into the servers main package
 ```yaml
 # config.yml
 # ----------
-
-database: databaseName
-collection: collectionName
+database: "databaseName"
+collection: "collectionName"
 ```
 ```java
 // Main.java
@@ -64,15 +56,15 @@ public class Main extends PluginBase {
 public class DatabaseHandler {
      
     // query document from database
-    public static Document query() {
+    public static Map<String, Object> query() {
         String database = Main.getInstance().getConfig().getString("database");
         String collection = Main.getInstance().getConfig().getString("collection");
         return NukkitDB.query(key, fieldName, database, collection);
     }
 
     // inserts a new document to database
-    public static void insertDocument(Document document) {
-        NukkitDB.insertDocument(document, plugin.getConfig().getString("database"), plugin.getConfig().getString("collection"));
+    public static void insertDocument(Map<String, Object> objectMap) {
+        NukkitDB.insertDocument(objectMap, plugin.getConfig().getString("database"), plugin.getConfig().getString("collection"));
     }
 
     // updates a document where field is equal to query and sets key to value
@@ -92,20 +84,22 @@ public class DatabaseHandler {
 ```
 You can create new documents to insert into database as follows:
 ```java
-public class YourClass {
+import java.util.HashMap;public class YourClass {
 
     public void yourMethod(Player player) {
 
         String uuid = player.getUniqueId().toString();
-        Document document = new Document();
-        document.append("uuid", uuid);
-        DatabaseHandler.insertDocument(document);
-        // you can add as many fields as you want with the '.append()' operator
-        // .append("field", value);        
+        Map<String, Object> objectMap = new HashMap<>();
+        document.put("uuid", uuid);
+        DatabaseHandler.insertDocument(objectMap);
+        // you can add as many fields as you want with the '.put()' operator
+        // .put("field", value);        
 
     }
 }
 ```
 
-# credits
+# credits [![HitCount](http://hits.dwyl.io/TimelessMC/NukkitDB.svg)](http://hits.dwyl.io/TimelessMC/NukkitDB)
 Icon made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+
+
