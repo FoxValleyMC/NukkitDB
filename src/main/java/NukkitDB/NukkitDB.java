@@ -9,6 +9,7 @@ import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class NukkitDB {
@@ -91,6 +92,19 @@ public class NukkitDB {
      * @param collection collection name
      * */
     public static void updateDocument(String querySearch, String field, String key, Integer value, String database, String collection) {
+        getCollection(getDatabase(database), collection).updateOne(Filters.eq(field, querySearch), new Document("$set", new Document(key, value)));
+    }
+
+    /**
+     * @apiNote update int value
+     * @param querySearch value to search in database where to update
+     * @param field field in database to search where to update
+     * @param key key in document to update
+     * @param value value to update in key
+     * @param database database name
+     * @param collection collection name
+     * */
+    public static void updateDocument(String querySearch, String field, String key, List<Object> value, String database, String collection) {
         getCollection(getDatabase(database), collection).updateOne(Filters.eq(field, querySearch), new Document("$set", new Document(key, value)));
     }
 
