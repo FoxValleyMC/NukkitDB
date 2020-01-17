@@ -28,9 +28,15 @@ dependencies {
     configurations.compile.extendsFrom(configurations.loadDependency)
 }
 
+//jar {
+//    from {
+//        configurations.loadDependency.collect { it.isDirectory() ? it : zipTree(it) }
+//    }
+//}
+
 jar {
-    from {
-        configurations.loadDependency.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest {
+        attributes "Main-Class": "NukkitDB.Main"
     }
 }
 
