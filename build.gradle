@@ -2,17 +2,9 @@ apply plugin: "java"
 apply plugin: "maven"
 
 repositories {
+    mavenCentral()
     maven {
         url "http://repo.nukkitx.com/main/"
-    }
-    maven {
-        url "https://mvnrepository.com/artifact/org.mongodb/bson"
-    }
-    maven {
-        url "https://mvnrepository.com/artifact/org.mongodb/mongodb-driver"
-    }
-    maven {
-        url "https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core"
     }
 }
 
@@ -24,11 +16,19 @@ dependencies {
     loadDependency group: 'org.mongodb', name: 'bson', version: '3.12.1'
     loadDependency group: 'org.mongodb', name: 'mongodb-driver', version: '3.12.1'
     loadDependency group: 'org.mongodb', name: 'mongodb-driver-core', version: '3.12.1'
-    implementation "cn.nukkit:nukkit:1.0-SNAPSHOT"
+    implementation group: 'cn.nukkit', name: 'nukkit', version: '1.0-SNAPSHOT'
     configurations.compile.extendsFrom(configurations.loadDependency)
 }
 
 jar {
+    manifest {
+        attributes "Main-Class": "NukkitDB.Main"
+    }
+
+//    from {
+//        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+//    }
+
     from {
         configurations.loadDependency.collect { it.isDirectory() ? it : zipTree(it) }
     }
