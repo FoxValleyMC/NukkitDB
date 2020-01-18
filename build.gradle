@@ -21,9 +21,9 @@ configurations {
 }
 
 dependencies {
-    loadDependency group: "org.mongodb", name:"bson", version: "3.11.0"
-    loadDependency group: "org.mongodb", name:"mongodb-driver", version:"3.11.0"
-    loadDependency group: "org.mongodb", name:"mongodb-driver-core", version:"3.11.0"
+    loadDependency group: 'org.mongodb', name: 'bson', version: '3.12.1'
+    loadDependency group: 'org.mongodb', name: 'mongodb-driver', version: '3.12.1'
+    loadDependency group: 'org.mongodb', name: 'mongodb-driver-core', version: '3.12.1'
     implementation "cn.nukkit:nukkit:1.0-SNAPSHOT"
     configurations.compile.extendsFrom(configurations.loadDependency)
 }
