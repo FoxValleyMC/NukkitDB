@@ -3,11 +3,13 @@ package NukkitDB;
 import cn.nukkit.utils.Config;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +53,19 @@ public class NukkitDB {
         } else {
             return null;
         }
+    }
+
+    public static List<Map<String, Object>> GetAll(String database, String collection) {
+        List<Map<String, Object>> mapList = new ArrayList<>();
+        Map<String, Object> objectMap = new HashMap<>();
+        FindIterable<Document> cursor = getCollection(getDatabase(database), collection).find();
+        for (Document document: cursor) {
+            for (Map.Entry<String, Object> entry : document.entrySet()) {
+                objectMap.put(entry.getKey(), entry.getValue());
+                mapList.add(objectMap);
+            }
+        }
+        return mapList;
     }
 
 
