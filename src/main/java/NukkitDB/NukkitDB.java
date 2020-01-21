@@ -59,11 +59,8 @@ public class NukkitDB {
         List<Map<String, Object>> mapList = new ArrayList<>();
         Map<String, Object> objectMap = new HashMap<>();
         FindIterable<Document> cursor = getCollection(getDatabase(database), collection).find();
-        for (Document document: cursor) {
-            for (Map.Entry<String, Object> entry : document.entrySet()) {
-                objectMap.put(entry.getKey(), entry.getValue());
-                mapList.add(objectMap);
-            }
+        for (Map<String, Object> document : cursor) {
+            mapList.add(document);
         }
         return mapList;
     }
