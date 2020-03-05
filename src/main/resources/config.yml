@@ -1,6 +1,8 @@
-# if using mongodb atlas
-uri: ""
+# MongoDB provider
+# false is disabled
+MongoDB: false
+MongoDB-uri: ""
 
-# if database is run on a local machine
-host: ""
-port: ""
+# MySQL provider
+# false is disabled
+MySQL: false
