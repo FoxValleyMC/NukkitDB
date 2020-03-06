@@ -1,7 +1,9 @@
 # MongoDB provider
 # false is disabled
+# collections are 'per-plugin'
 MongoDB: false
 MongoDB-uri: ""
+MongoDB-database: ""
 
 # MySQL provider
 # false is disabled
